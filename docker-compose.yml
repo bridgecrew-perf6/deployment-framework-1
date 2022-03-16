@@ -1,0 +1,66 @@
+version: "3.5"
+
+services:
+
+  df:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: deploymentframework:v0.0.1
+    depends_on:
+      - neo4j
+    ports:
+      - '4000:80'
+    networks:
+      - backend
+    volumes:
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/drivers'
+        target: '/df/drivers'
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/metadata'
+        target: '/df/metadata'
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/processors'
+        target: '/df/processors'
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/models'
+        target: "/df/models"
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/sources'
+        target: '/df/sources'
+      - type: 'bind'
+        source: '${DF_AIRFLOW_HOME}/dags'
+        target: '/df/dags'
+      - type: 'bind'
+        source: '${DF_HOME}/df-data/scripts'
+        target: '/df/scripts'
+
+  neo4j:
+    image: bitnami/neo4j:latest
+    restart: always
+    volumes:
+      - 'neo4j_data:/bitnami'
+    ports:
+      - '7474:7474'
+      - '7473:7473'
+      - '7687:7687'
+    expose:
+      - '7474'
+      - '7473'
+      - '7687'
+    environment:
+      NEO4J_USERNAME: 'neo4j'
+      NEO4J_PASSWORD: 'qwerty'
+      NEO4J_BOLT_PORT_NUMBER: 7687
+      NEO4J_HTTP_PORT_NUMBER: 7474
+      NEO4J_HTTPS_PORT_NUMBER: 7473
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  neo4j_data:
+    driver: local

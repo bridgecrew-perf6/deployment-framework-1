@@ -1,0 +1,11 @@
+pandas
+sklearn
+tqdm
+sqlalchemy
+networkx
+neo4j
+setuptools
+pyyaml
+jinja2
+psycopg2
+Sphinx

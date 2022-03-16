@@ -1,0 +1,58 @@
+drop table if exists visits_workorders_view_test_app;
+create table if not exists visits_workorders_view_test_app (
+    visit_id varchar(60),
+    instance_id bigint,
+    visit_type_code varchar(60),
+    vistit_number bigint,
+    status_code varchar(60),
+    start_date_time timestamp,
+    close_date_time timestamp,
+    workorder_id bigint,
+    workorder_name varchar(2000),
+    actual_start_date timestamp,
+    actual_end_date timestamp
+);
+
+
+drop table if exists cmro_transactions;
+create table if not exists cmro_transactions (
+    organization_id bigint,
+    organization_name varchar(300),
+    subinventory_code varchar(100),
+    transaction_date timestamp,
+    inventory_item_id bigint,
+    item_name varchar(2000),
+    item_description varchar(2000),
+    statya_tmc varchar(2000),
+    uom_name varchar(30),
+    serial_number varchar(30),
+    sob_plane varchar(30),
+    cost double precision,
+    nomenklaturn varchar(60),
+    srt bigint,
+    transaction_quantity double precision,
+    real_transaction_quantity double precision,
+    next_sn varchar(60),
+    order_task varchar(2000),
+    mo_description varchar(2000),
+    owner_name varchar(2000),
+    trn_reference varchar(100),
+    work_order varchar(4000),
+    price_cost double precision,
+    price_mvz varchar(300),
+    PO varchar(200),
+    reval_amount1 double precision,
+    reval_amount2 double precision,
+    reval_amount3 double precision,
+    reval_amount4 double precision,
+    vendor_name varchar(2000),
+    order_num varchar(300),
+    requisition_num varchar(300),
+    unit_price double precision,
+    currency_code varchar(30),
+    order_trnsct_quantity double precision,
+    currency_conversion_rate double precision,
+    full_cost double precision,
+    full_customs_number varchar(60),
+    avg_cost double precision
+);
